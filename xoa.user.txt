@@ -1,5 +1,6 @@
 public function getXoa($id)
     {
+	//$id as id user
         $user = User::find($id);
         $comment = Comment::where('idUser',$id);
         $comment->delete();
