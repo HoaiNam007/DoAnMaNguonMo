@@ -1,0 +1,30 @@
+﻿public function getDangnhapUser(){
+        return view('user.signup');
+    }
+
+    public function postDangnhapUser(Request $request){
+        $this->validate($request,
+            [
+                'email'=>'required',
+                'password'=>'required|min:3|max:32'
+            ],
+            [
+                'email.required'=>'Bạn chưa nhập email',
+                'email.email'=>'Bạn chưa nhập đúng định dạng email',
+                'password.required'=>'Bạn chưa nhập mật khẩu',
+                'password.min'=>'Yêu cầu mật khẩu có độ dài ít nhất là 3 ký tự',
+                'password.max'=>'Độ dài tối đa của mật khẩu là 32 ký tự'
+            ]); 
+        if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
+            $user= Auth::user();
+            if($user->quyen==1) {
+                return redirect('admin/');
+            }
+            else{
+                return redirect('/');
+            }
+        }
+        else{
+            return redirect('/login')->with('thongbao','Đăng nhập thất bại !');
+        }
+    }
