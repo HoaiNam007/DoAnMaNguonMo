@@ -27,7 +27,7 @@ public function getDangkyUser(){
         $user->email=$request->email;
         $user->password=bcrypt($request->password);
         $user->quyen=$request->quyen;
-        $user->save();
+        $user->save(();
 
         return redirect('/')->with('thongbao','Chào mừng bạn đến với Jeijei Coffee');
     }
