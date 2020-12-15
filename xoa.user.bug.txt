@@ -1,0 +1,8 @@
+public function getXoa()
+    {
+        $user = User::find($id);
+        $comment = Comment::where('idUser',$id);
+        $comment->delete();
+        $user->delete();
+        return redirect('admin/user/danhsach')->with('thongbao','Xóa tài khoản thành công');
+    }
