@@ -1,5 +1,5 @@
 ﻿public function getDangnhapAdmin(){
-        return view('user.login');
+        return view('admin.login');
     }
 
     public function postDangnhapAdmin(Request $request){
