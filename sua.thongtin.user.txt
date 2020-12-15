@@ -1,0 +1,36 @@
+public function getInfoUser($id){
+        $user = Auth::user($id);
+        return view('user.info',['user'=>$user]);
+    }
+
+    public function postInfoUser(Request $request,$id){
+        $this->validate($request,
+            [
+                'name'=>'required|min:3'
+            ],
+            [
+                'name.required'=>'Bạn chưa nhập tên',
+                'name.min'=>'Yêu cầu tên người dùng có độ dài ít nhất là 3 ký tự'
+            ]);  
+        $user = Auth::user($id);
+        $user->name=$request->name;
+
+        if(isset($request->changePassword)){
+            $this->validate($request,
+            [
+                'password'=>'required|min:3|max:32',
+                'passwordLan2'=>'required|same:password'
+            ],
+            [
+                'password.required'=>'Bạn chưa nhập mật khẩu',
+                'password.min'=>'Yêu cầu mật khẩu có độ dài ít nhất là 3 ký tự',
+                'password.max'=>'Độ dài tối đa của mật khẩu là 32 ký tự',
+                'passwordLan2.required'=>'Không khớp với mật khẩu đã nhập'
+            ]);  
+
+            $user->password=bcrypt($request->password);
+        }
+        $user->save();
+
+        return redirect('info/'.$id)->with('thongbao','Sửa thông tin thành công');
+    }
