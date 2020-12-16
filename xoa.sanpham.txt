@@ -1,6 +1,6 @@
-public function getXoa($id){
-        $loaitin = LoaiTin::find($id);
-        $tintuc = TinTuc::where('idLoaiTin',$id);
+public function getXoa(id){
+        $loaitin = LoaiTin::find(id);
+        $tintuc = TinTuc::where('idLoaiTin',id);
 
         $tintuc->delete();
         $loaitin->delete();
