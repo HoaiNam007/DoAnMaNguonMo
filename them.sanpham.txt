@@ -1,0 +1,26 @@
+public function getThem(){ 
+    	$theloai = TheLoai::all(); 
+        return view('admin.loaitin.them',['theloai'=>$theloai]);     	
+    }
+
+    public function postThem(Request $request){  
+        $this->validate($request,
+            [
+                'Ten'=>'required|unique:LoaiTin,Ten|min:1|max:100|',
+                'TheLoai'=>'required'
+            ],
+            [
+                'Ten.required'=>'Bạn chưa nhập tên loại tin',
+                'Ten.unique'=>'Tên loại tin đã tồn tại',
+                'Ten.min'=>'Yêu cầu tên loại tin có độ dài từ 1 đến 100 ký tự',
+                'Ten.max'=>'Yêu cầu tên loại tin có độ dài từ 1 đến 100 ký tự',
+                'TheLoai.required'=>'Bạn chưa chọn thể loại'
+            ]);  
+        $loaitin= new LoaiTin;
+        $loaitin->Ten=$request->Ten;
+        $loaitin->TenKhongDau = changeTitle($request->Ten);
+        $loaitin->idTheLoai = $request->TheLoai;
+
+
+        return redirect('admin/loaitin/them')->with('thongbao','Thêm sản phẩm thành công');
+    }
