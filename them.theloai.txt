@@ -13,7 +13,7 @@ public function getThem(){
                 'Ten.min'=>'Yêu cầu tên thể loại có độ dài từ 3 đến 100 ký tự',
                 'Ten.max'=>'Yêu cầu tên thể loại có độ dài từ 3 đến 100 ký tự',
             ]);  
-        $theloai= new TheLoai;
+        $theloai=  TheLoai;
         $theloai->Ten=$request->Ten;
         $theloai->TenKhongDau = changeTitle($request->Ten);
         $theloai->save();
