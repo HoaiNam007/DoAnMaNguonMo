@@ -1,0 +1,15 @@
+public function getXoa($id){
+       // $theloai = TheLoai::find($id);
+       // $theloai->delete();
+
+        $theloai = TheLoai::find($id);
+        $loaitin = LoaiTin::where('idTheLoai',$id);
+        if(count($theloai->loaitin)>0){
+            $dem=count($theloai->loaitin);
+            return redirect('admin/theloai/danhsach/')->with('thongbao','Thể loại này đã có  '.$dem.' sản phẩm, không thể xóa!');
+        }
+        $loaitin->delete();
+        $theloai->delete();
+
+        return redirect('admin/theloai/danhsach/')->with('thongbao','Xóa thành công');
+    }
