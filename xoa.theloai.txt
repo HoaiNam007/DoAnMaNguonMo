@@ -1,4 +1,4 @@
-public function getXoa($id){
+﻿function getXoa($id){
        // $theloai = TheLoai::find($id);
        // $theloai->delete();
 
